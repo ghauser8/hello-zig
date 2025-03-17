@@ -13,11 +13,23 @@ pub fn main() void {
         [_]usize{ 7, 8, 9 },
     };
 
-    _ = A;
-    _ = B;
+    var AB = [3][3]usize{
+        [_]usize{ 0, 0, 0 },
+        [_]usize{ 0, 0, 0 },
+        [_]usize{ 0, 0, 0 },
+    };
 
-    // for [0..3] |i| {
-    //     for [0..3] |j| {
-    //         for [0..3]
+    var dot: usize = 0;
 
+    for (0..3) |i| {
+        for (0..3) |j| {
+            for (0..3, 0..3) |m, n| {
+                dot += A[i][n] * B[m][j];
+                AB[i][j] = dot;
+                dot = 0;
+            }
+        }
+    }
+
+    std.debug.print("AB: {any}\n", .{AB});
 }
